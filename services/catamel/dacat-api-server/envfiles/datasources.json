@@ -1,0 +1,21 @@
+{
+    "db": {
+      "name": "db",
+      "connector": "memory"
+    },
+    "mongo": {
+      "host": "local-mongodb-mongodb.dev",
+      "port": 27017,
+      "url": "",
+      "database": "dacat",
+      "password": "",
+      "name": "mongo",
+      "user": "",
+      "connector": "mongodb"
+    },
+    "transient": {
+      "name": "transient",
+      "connector": "transient"
+    }
+  }
+  

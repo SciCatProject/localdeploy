@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "name" . }}
+data:
+  config.local.js: |-
+{{ .Files.Get "envfiles/config.local.js" | indent 4 }}
+  component-config.json: |-
+{{ .Files.Get "envfiles/component-config.json" | indent 4 }}
+  middleware.json: |-
+{{ .Files.Get "envfiles/middleware.json" | indent 4 }}
+  datasources.json: |-
+{{ .Files.Get "envfiles/datasources.json" | indent 4 }}
+  providers.json: |-
+{{ .Files.Get "envfiles/providers.json" | indent 4 }}
