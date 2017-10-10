@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export DACATHOME=/home/encima/dev/psi
-export REPO=git@gitlab.psi.ch:MELANIE/catanie.git
+export REPO=git@github.com:ScicatProject/catanie.git
 envarray=(dev)
 portarray=(30021 30023)
 hostextarray=('-qa' '')
