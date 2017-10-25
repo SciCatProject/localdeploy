@@ -38,7 +38,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/bitnami/kafka"
+    path: "/opt/kafka/data"
 ---
 kind: PersistentVolume
 apiVersion: v1
