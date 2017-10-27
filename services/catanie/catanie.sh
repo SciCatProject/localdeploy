@@ -10,7 +10,6 @@ certarray=('discovery' 'discovery')
 echo $1
 
 for ((i=0;i<${#envarray[@]};i++)); do
-   export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
    export LOCAL_ENV="${envarray[i]}"
    export PORTOFFSET="${portarray[i]}"
    export HOST_EXT="${hostextarray[i]}"
@@ -31,6 +30,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
      echo "Building release"
      ./node_modules/@angular/cli/bin/ng build --environment $LOCAL_ENV -op dist/$LOCAL_ENV
    fi
+   export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
    docker build -t $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV --build-arg env=$LOCAL_ENV .
    docker push $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV
    echo "Deploying to Kubernetes"
