@@ -8,7 +8,6 @@ envarray=(dev)
 echo $1
 
 for ((i=0;i<${#envarray[@]};i++)); do
-   export CATAMEL_IMAGE_VERSION=$(git rev-parse HEAD)
    export LOCAL_ENV="${envarray[i]}"
    export LOCAL_IP="$1"
    echo $LOCAL_ENV
@@ -23,6 +22,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
      npm install
      echo "Building release"
    fi
+   export CATAMEL_IMAGE_VERSION=$(git rev-parse HEAD)
    docker build -t $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV .
    docker push $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV
    echo "Deploying to Kubernetes"

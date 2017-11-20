@@ -8,7 +8,7 @@ image:
   pullPolicy: IfNotPresent
 service:
   name: catanie
-  type: ClusterIP
+  type: NodePort
   externalPort: 80
   internalPort: 80
 ingress:

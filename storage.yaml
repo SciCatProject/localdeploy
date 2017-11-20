@@ -1,0 +1,69 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pvmongo
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/bitnami/mongodb"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pvrabbit
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/bitnami/rabbitmq"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pvkafka
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/opt/kafka/data"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pvzookeeper-0
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/bitnami/zookeeper"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pvzookeeper-1
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/bitnami/zookeeper"
