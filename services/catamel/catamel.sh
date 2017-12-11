@@ -15,7 +15,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
    cd ./services/catamel/
    if [ -d "./component/" ]; then
      cd component/
-     git pull origin master
+     git pull 
    else
      git clone $REPO component
      cd component/
