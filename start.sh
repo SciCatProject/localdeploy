@@ -12,7 +12,7 @@ minikube start --insecure-registry localhost:5000 --extra-config=apiserver.Gener
 kubectl config use-context minikube #should auto set, but added in case
 
 kubectl -n kube-system create sa tiller
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+kubectl create -f rbac-config.yaml
 helm init --service-account tiller
 helm repo update
 kubectl apply -f ./deployments/registry.yaml
