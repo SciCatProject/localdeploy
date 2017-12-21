@@ -8,7 +8,6 @@ fi
 echo $LOCAL_IP
 minikube start --insecure-registry localhost:5000 --extra-config=apiserver.GenericServerRunOptions.AuthorizationMode=RBAC
 
-/usr/local/bin/helm init
 kubectl config use-context minikube #should auto set, but added in case
 
 kubectl -n kube-system create sa tiller
