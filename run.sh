@@ -51,7 +51,7 @@ done
 SERVICES_DIR=./services/*/*.sh
 
 for file in $SERVICES_DIR; do
-  sh $file $LOCAL_IP $CATANIE_REPO $CATAMEL_REPO
+  bash $file $LOCAL_IP $CATANIE_REPO $CATAMEL_REPO
 done
 
 
