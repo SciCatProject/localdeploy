@@ -17,6 +17,7 @@ while getopts 'hkd:' flag; do
     d) DOCKER_REPO=${OPTARG} ;;
     h) echo "-d for Docker Repo prefix"; exit 1 ;;
     k) KAFKA=1 ;;
+    f) FILESERVER=1 ;;
   esac
 done
 
@@ -29,7 +30,9 @@ echo $CATANIE_REPO
 helm del --purge local-mongodb
 helm del --purge local-rabbit
 helm del --purge local-node
+        if [[ "KAFKA" -eq "1" ]]; then
 helm del --purge local-kafka
+fi
 
 for file in $NS_DIR; do
   f="$(basename $file)"
