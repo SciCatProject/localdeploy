@@ -1,0 +1,9 @@
+version: '3'
+services:
+  tornado:
+    build:
+      context: tornado
+    image: garethcmurphy/tornado
+    ports:
+     - "8888:8888"
+    
