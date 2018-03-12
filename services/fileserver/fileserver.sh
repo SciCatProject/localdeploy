@@ -14,12 +14,10 @@ cd services/fileserver/
 git clone https://github.com/garethcmurphy/minitornado.git
 	cd minitornado
    fi
-cd tornado
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
 docker build . -t garethcmurphy/tornado:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 docker push garethcmurphy/tornado:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
-cd ..
 cd ..
 cd ..
 pwd

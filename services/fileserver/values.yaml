@@ -8,9 +8,9 @@ image:
   pullPolicy: IfNotPresent
 service:
   name: fileserver
-  type: ClusterIP
-  externalPort: 1990
-  internalPort: 1990
+  type: NodePort
+  externalPort: 8888
+  internalPort: 8888
 ingress:
   enabled: true
   # Used to create an Ingress record.
