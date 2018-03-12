@@ -7,12 +7,12 @@ echo $1
    echo $LOCAL_ENV
 helm del --purge fileserver
 cd services/fileserver/
-   if [ -d "./minitornado/" ]; then
-	cd minitornado
+   if [ -d "./component/" ]; then
+	cd component
      git pull 
    else
-git clone https://github.com/garethcmurphy/minitornado.git
-	cd minitornado
+git clone https://github.com/garethcmurphy/minitornado.git component
+	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
 docker build . -t garethcmurphy/tornado:$FILESERVER_IMAGE_VERSION$LOCAL_ENV

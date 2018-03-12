@@ -9,4 +9,5 @@ kubectl port-forward --namespace dev $(kubectl get po -n dev | grep rabbitmq | a
 kubectl port-forward --namespace dev $(kubectl get po -n dev | grep catanie | awk '{print $3;}') 8000:80
 kubectl port-forward --namespace dev $(kubectl get po -n dev | grep node | awk '{print $3;}') 1880:1880
 kubectl port-forward --namespace dev $(kubectl get po -n dev | grep catamel | awk '{print $1;}') 3000:3000
+kubectl port-forward --namespace dev $(kubectl get po -n dev | grep fileserver  | awk '{print $1;}') 8888:8888
 docker login localhost:5000
