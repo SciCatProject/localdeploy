@@ -12,7 +12,7 @@ fi
 DOCKER_REPO="localhost:5000"
 KAFKA=0 
 
-while getopts 'hkd:' flag; do
+while getopts 'fhkd:' flag; do
   case "${flag}" in
     d) DOCKER_REPO=${OPTARG} ;;
     h) echo "-d for Docker Repo prefix"; exit 1 ;;
@@ -54,7 +54,14 @@ done
 SERVICES_DIR=./services/*/*.sh
 
 for file in $SERVICES_DIR; do
-  bash $file $LOCAL_IP $CATANIE_REPO $CATAMEL_REPO
+  #bash $file $LOCAL_IP $CATANIE_REPO $CATAMEL_REPO
+    if [ $file !=  "./services/fileserver/fileserver.sh" ]; then
+        bash $file $LOCAL_IP $CATANIE_REPO $CATAMEL_REPO
+    else
+        if [[ "FILESERVER" -eq "1" ]]; then
+        bash $file $LOCAL_IP $CATANIE_REPO $CATAMEL_REPO
+        fi
+    fi
 done
 
 
