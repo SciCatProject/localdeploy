@@ -9,12 +9,13 @@ echo $LOCAL_IP
 minikube start --insecure-registry localhost:5000 --extra-config=apiserver.GenericServerRunOptions.AuthorizationMode=RBAC
 
 kubectl config use-context minikube #should auto set, but added in case
-
-kubectl -n kube-system create sa tiller
+kubectl create namespace dev
+# kubectl -n kube-system create sa tiller
 kubectl create -f rbac-config.yaml
 helm init --service-account tiller
 helm repo update
 kubectl apply -f ./deployments/registry.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/alternative/kubernetes-dashboard.yaml
 #kubectl apply -f ./deployments/ingress/nginx-controller.yaml
 curl https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/namespace.yaml \
     | kubectl apply -f -

@@ -89,3 +89,8 @@ https://docs.docker.com/registry/insecure/
 export POD_NAME=$(kubectl get pods --namespace dev -l "app=calico-lynx-rabbitmq" -o jsonpath="{.items[0].metadata.name}")                                                
 kubectl port-forward $POD_NAME 5672:5672 15672:15672 
 ```
+
+#### Access Dashboard
+
+`kubectl proxy`
+`http://127.0.0.1:8002/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/overview`
