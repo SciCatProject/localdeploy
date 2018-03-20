@@ -32,6 +32,7 @@ module.exports = {
         jobSuccess: "Succesfully finished",
         jobError: "Finished with errors",
         jobCancel: "Cancelled"
-    }
+    },
+    queue: "rabbitmq"
 };
 
