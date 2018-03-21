@@ -10,12 +10,18 @@ The purpose of this repo is to create a minimal install of the Data Catalog proj
 * MongoDB - running locally is easiest, but this will be installed by Helm
 * RabbitMQ - running locally is easiest, but this will be installed by Helm
 * Homebrew (OS X only)
+* Node
+* npm
 
 ### Software auto installed;
 
-* Minkube
+* Minikube
 * Kubectl
 * Helm
+
+### If using macos, Docker hub account
+
+
 
 ## How? 
 
