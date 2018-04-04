@@ -16,9 +16,14 @@ metadata:
     {{- range $key, $value := .Values.ingress.annotations }}
       {{ $key }}: {{ $value | quote }}
     {{- end }}
+    ingress.kubernetes.io/ssl-redirect: "true"
 spec:
+  tls:
+  - secretName: catamelservice
+    hosts:
+    - {{ $host }}
   rules:
-    - host: {{ $host }}-{{ $namespace }}.local
+    - host: {{ $host }}
       http:
         paths:
           - path: /
