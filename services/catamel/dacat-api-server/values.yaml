@@ -16,7 +16,7 @@ ingress:
   # Used to create an Ingress record.
   # this will be extended by environment within yaml file
   # TODO: change service name to include environment ?
-  host: http://catamelservice.esss.dk:30003',
+  host: scicatapi.esss.dk
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
