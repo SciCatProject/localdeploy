@@ -2,7 +2,7 @@
 
 export DACATHOME=/home/encima/dev/psi
 export REPO=https://github.com/SciCatProject/catanie.git
-envarray=(dev)
+envarray=(dmsc)
 portarray=(30021 30023)
 hostextarray=('-qa' '')
 certarray=('discovery' 'discovery')
@@ -30,6 +30,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
      git checkout develop
 	git pull
      npm install
+./CI/ESS/copyimages.sh
      echo "Building release"
      ./node_modules/@angular/cli/bin/ng build --environment $LOCAL_ENV -op dist/$LOCAL_ENV
    fi
