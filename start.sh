@@ -6,7 +6,8 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         LOCAL_IP=`hostname --ip-address`
 fi
 echo $LOCAL_IP
-minikube start minikube start --kubernetes-version=v1.9.0 --insecure-registry localhost:5000 --extra-config=apiserver.GenericServerRunOptions.AuthorizationMode=RBAC
+#minikube start -v7  --insecure-registry localhost:5000 --extra-config=apiserver.GenericServerRunOptions.AuthorizationMode=RBAC
+minikube start 
 
 kubectl config use-context minikube #should auto set, but added in case
 
@@ -36,6 +37,9 @@ curl https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/rb
 curl https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/with-rbac.yaml \
     | kubectl apply -f -
 sleep 5
+
+kubectl apply -f service-nodeport.yaml
+
 
 NS_DIR=./namespaces/*.yaml
 
