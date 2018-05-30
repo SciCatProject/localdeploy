@@ -2,7 +2,7 @@
 
 export DACATHOME=/home/encima/dev/psi
 export REPO=https://github.com/SciCatProject/catanie.git
-envarray=(dmsc)
+envarray=(dmscprod dmsc)
 portarray=(30021 30023)
 hostextarray=('-qa' '')
 certarray=('discovery' 'discovery')
@@ -23,6 +23,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
      cd component/
      git checkout develop
 	git pull
+./CI/ESS/copyimages.sh
      ./node_modules/@angular/cli/bin/ng build --environment $LOCAL_ENV -op dist/$LOCAL_ENV
    else
      git clone $REPO component
