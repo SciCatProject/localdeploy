@@ -41,7 +41,6 @@ sleep 5
 kubectl apply -f service-nodeport.yaml
 kubectl apply -f configmap.yaml
 
-./secret.sh
 
 NS_DIR=./namespaces/*.yaml
 
