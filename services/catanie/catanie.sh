@@ -1,8 +1,18 @@
 #!/bin/bash
 
+envarray=(dmsc)
+
+INGRESS_NAME=" "
+if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
+	envarray=(dmsc)
+    INGRESS_NAME="--config ./dacat-gui/dmsc.yaml"
+elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
+	envarray=(ess)
+    INGRESS_NAME="--config ./dacat-gui/lund.yaml"
+fi
+
 export DACATHOME=/home/encima/dev/psi
 export REPO=https://github.com/SciCatProject/catanie.git
-envarray=(dmscprod dmsc)
 portarray=(30021 30023)
 hostextarray=('-qa' '')
 certarray=('discovery' 'discovery')
