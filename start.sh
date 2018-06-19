@@ -39,6 +39,7 @@ curl https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/wi
 sleep 5
 
 kubectl apply -f service-nodeport.yaml
+kubectl apply -f configmap.yaml
 
 
 NS_DIR=./namespaces/*.yaml
