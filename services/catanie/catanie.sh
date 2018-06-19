@@ -5,10 +5,10 @@ envarray=(dmsc)
 INGRESS_NAME=" "
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 	envarray=(dmsc)
-    INGRESS_NAME="--config ./dacat-gui/dmsc.yaml"
+    INGRESS_NAME="-f ./dacat-gui/dmsc.yaml"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
-    INGRESS_NAME="--config ./dacat-gui/lund.yaml"
+    INGRESS_NAME="-f ./dacat-gui/lund.yaml"
 fi
 
 export DACATHOME=/home/encima/dev/psi
