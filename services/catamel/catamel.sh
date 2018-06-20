@@ -10,7 +10,7 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-api-server/dmsc.yaml"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
     INGRESS_NAME="-f ./dacat-api-server/lund.yaml"
-elif  [ "$(hostname)" == "k8lmgr.esss.dk" ]; then
+elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-api-server/dmscprod.yaml"
 fi
 
