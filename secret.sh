@@ -18,6 +18,9 @@ elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	kubectl create secret -ndev tls catamelservice --key catamel.key --cert catamel.crt
 	# kubectl create secret -ndev tls fileserverservice --key fileserver.key --cert fileserver.crt
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
+	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=scicat.esss.dk" -days 3650
+	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=scicatapi.esss.dk" -days 3650
+	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt -subj "/CN=scicatfileserver.esss.dk" -days 3650
 	kubectl create secret -ndmscprod tls catanieservice --key catanie.key --cert catanie.crt
 	kubectl create secret -ndev tls catamelservice --key catamel.key --cert catamel.crt
 	kubectl create secret -ndev tls fileserverservice --key fileserver.key --cert fileserver.crt
