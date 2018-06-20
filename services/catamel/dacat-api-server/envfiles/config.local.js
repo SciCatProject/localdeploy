@@ -8,7 +8,7 @@ module.exports = {
     policyPublicationShiftInYears: 3,
     policyRetentionShiftInYears: 10,
     site: 'ESS',
-    facilities: ["Loki"],
+    facilities: ["loki"],
     datasetStatusMessages: {
         datasetCreated: "Dataset created",
         datasetOndisk: "Stored on primary disk and on archive disk",

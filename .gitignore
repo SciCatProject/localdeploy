@@ -1,2 +1,4 @@
 scripts/*
 services/*/component
+hdf5/*/component
+.idea

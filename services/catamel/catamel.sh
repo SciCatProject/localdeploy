@@ -5,6 +5,16 @@ export REPO=https://github.com/SciCatProject/catamel.git
 envarray=(dev)
 
 
+INGRESS_NAME=" "
+if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
+    INGRESS_NAME="-f ./dacat-api-server/dmsc.yaml"
+elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
+    INGRESS_NAME="-f ./dacat-api-server/lund.yaml"
+elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
+    INGRESS_NAME="-f ./dacat-api-server/dmscprod.yaml"
+fi
+
+
 echo $1
 
 for ((i=0;i<${#envarray[@]};i++)); do
@@ -29,6 +39,6 @@ for ((i=0;i<${#envarray[@]};i++)); do
    docker push $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV
    echo "Deploying to Kubernetes"
    cd ..
-   helm install dacat-api-server --name catamel --namespace $LOCAL_ENV --set image.tag=$CATAMEL_IMAGE_VERSION$LOCAL_ENV --set image.repository=$3
+   helm install dacat-api-server --name catamel --namespace $LOCAL_ENV --set image.tag=$CATAMEL_IMAGE_VERSION$LOCAL_ENV --set image.repository=$3 ${INGRESS_NAME}
    # envsubst < ../catanie-deployment.yaml | kubectl apply -f - --validate=false
 done

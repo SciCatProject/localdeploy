@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for hdf5-rest-server
+name: hdf5-rest-server
+version: 0.1.0
