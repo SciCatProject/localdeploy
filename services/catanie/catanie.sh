@@ -9,6 +9,9 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./dacat-gui/lund.yaml"
+elif  [ "$(hostname)" == "k8lmgr.esss.dk" ]; then
+	envarray=(dmscprod)
+    INGRESS_NAME="-f ./dacat-gui/dmscprod.yaml"
 fi
 
 export DACATHOME=/home/encima/dev/psi
