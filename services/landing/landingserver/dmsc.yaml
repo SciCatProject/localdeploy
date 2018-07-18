@@ -1,0 +1,3 @@
+ingress:
+  enabled: true
+  host: kubetest03.dm.esss.dk
