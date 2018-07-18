@@ -38,7 +38,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
 	git pull
 ./CI/ESS/copyimages.sh
      npm install
-     ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV -op dist/$LOCAL_ENV
+     ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV --output-path dist/$LOCAL_ENV
    else
      git clone $REPO component
      cd component/
@@ -47,7 +47,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
      npm install
 ./CI/ESS/copyimages.sh
      echo "Building release"
-     ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV -op dist/$LOCAL_ENV
+     ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV --output-path dist/$LOCAL_ENV
    fi
    export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
    docker build -t $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV -t $2:latest --build-arg env=$LOCAL_ENV .
