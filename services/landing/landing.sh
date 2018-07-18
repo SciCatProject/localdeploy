@@ -19,10 +19,9 @@ docker build . -t garethcmurphy/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCA
 docker push garethcmurphy/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
 cd ..
-cd ..
 pwd
-echo helm install landing --name landing --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=garethcmurphy/landingpageserver
-helm install landing --name landing --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=garethcmurphy/landingpageserver
+echo helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=garethcmurphy/landingpageserver
+helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=garethcmurphy/landingpageserver
 # envsubst < ../catanie-deployment.yaml | kubectl apply -f - --validate=false
 
 
