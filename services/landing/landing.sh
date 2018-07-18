@@ -16,7 +16,7 @@ git clone https://github.com/garethcmurphy/landingpageserver.git component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
 docker build . -t garethcmurphy/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
-docker push garethcmurphy/landingpagerserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+docker push garethcmurphy/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
 cd ..
 cd ..
