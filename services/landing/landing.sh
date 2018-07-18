@@ -5,7 +5,7 @@ echo $1
 
    export LOCAL_ENV="${envarray[i]}"
    echo $LOCAL_ENV
-helm del --purge landing
+helm del --purge landingserver
 cd services/landing/
    if [ -d "./component/" ]; then
 	cd component
