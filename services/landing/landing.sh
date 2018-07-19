@@ -9,7 +9,7 @@ elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
-	envarray=(dmscprod)
+	envarray=(dev)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
 fi
 
