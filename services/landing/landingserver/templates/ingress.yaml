@@ -17,6 +17,7 @@ metadata:
       {{ $key }}: {{ $value | quote }}
     {{- end }}
     ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
   - secretName: landingserverservice
@@ -27,6 +28,10 @@ spec:
       http:
         paths:
           - path: /
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /detail/(.*)
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
