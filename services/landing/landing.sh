@@ -23,7 +23,7 @@ cd services/landing/
 	cd component
      git pull 
    else
-git clone https://github.com/garethcmurphy/landingpageserver.git component
+git clone https://github.com/SciCatProject/landingpageserver.git component
 	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
