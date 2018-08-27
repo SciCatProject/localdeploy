@@ -27,13 +27,13 @@ git clone https://github.com/SciCatProject/landingpageserver.git component
 	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
-docker build . -t dacat/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
-docker push dacat/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+docker build . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+docker push dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
 cd ..
 pwd
 echo helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landingpageserver ${INGRESS_NAME}
-helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landingpageserver ${INGRESS_NAME}
+helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landing ${INGRESS_NAME}
 # envsubst < ../catanie-deployment.yaml | kubectl apply -f - --validate=false
 
 
