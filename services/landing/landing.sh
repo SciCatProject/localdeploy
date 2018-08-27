@@ -9,7 +9,7 @@ elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
-	envarray=(dev)
+	envarray=(dmscprod)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
 fi
 
@@ -23,17 +23,17 @@ cd services/landing/
 	cd component
      git pull 
    else
-git clone https://github.com/garethcmurphy/landingpageserver.git component
+git clone https://github.com/SciCatProject/landingpageserver.git component
 	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
-docker build . -t garethcmurphy/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
-docker push garethcmurphy/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+docker build . -t dacat/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+docker push dacat/landingpageserver:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
 cd ..
 pwd
-echo helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=garethcmurphy/landingpageserver ${INGRESS_NAME}
-helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=garethcmurphy/landingpageserver ${INGRESS_NAME}
+echo helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landingpageserver ${INGRESS_NAME}
+helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$FILESERVER_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landingpageserver ${INGRESS_NAME}
 # envsubst < ../catanie-deployment.yaml | kubectl apply -f - --validate=false
 
 
