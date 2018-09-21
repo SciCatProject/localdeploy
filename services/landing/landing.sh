@@ -2,15 +2,18 @@ envarray=(dev)
 
 
 INGRESS_NAME=" "
+DOCKERFILE= "./Dockerfile"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 	envarray=(dmsc)
     INGRESS_NAME="-f ./landingserver/dmsc.yaml"
+	DOCKERFILE= "./CI/ESS/Dockerfile.dmscprod"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
 	envarray=(dmscprod)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
+	DOCKERFILE= "./CI/ESS/Dockerfile.dmscprod"
 fi
 
 echo $1
@@ -27,7 +30,7 @@ git clone https://github.com/SciCatProject/landingpageserver.git component
 	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
-docker build . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+docker build -f $DOCKERFILE . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 docker push dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
 cd ..
