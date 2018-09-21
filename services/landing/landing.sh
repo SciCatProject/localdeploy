@@ -1,16 +1,20 @@
+#!/usr/bin/env bash
 envarray=(dev)
 
 
 INGRESS_NAME=" "
+DOCKERNAME="-f ./Dockerfile"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 	envarray=(dmsc)
     INGRESS_NAME="-f ./landingserver/dmsc.yaml"
+	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmscprod"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
 	envarray=(dmscprod)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
+	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmscprod"
 fi
 
 echo $1
