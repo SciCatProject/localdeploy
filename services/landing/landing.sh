@@ -13,7 +13,6 @@ elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
 	envarray=(dmscprod)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
-	DOCKERFILE= "./CI/ESS/Dockerfile.dmscprod"
 fi
 
 echo $1
@@ -30,6 +29,7 @@ git clone https://github.com/SciCatProject/landingpageserver.git component
 	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
+DOCKERFILE= "-f ./CI/ESS/Dockerfile.dmscprod"
 docker build -f $DOCKERFILE . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 docker push dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
