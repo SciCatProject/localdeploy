@@ -2,11 +2,9 @@ envarray=(dev)
 
 
 INGRESS_NAME=" "
-DOCKERFILE= "./Dockerfile"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 	envarray=(dmsc)
     INGRESS_NAME="-f ./landingserver/dmsc.yaml"
-	DOCKERFILE= "./CI/ESS/Dockerfile.dmscprod"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
@@ -30,6 +28,9 @@ git clone https://github.com/SciCatProject/landingpageserver.git component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
 DOCKERFILE= "-f ./CI/ESS/Dockerfile.dmscprod"
+if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
+	DOCKERFILE= "-f ./CI/ESS/Dockerfile.dmscprod"
+fi
 ls CI/ESS
 docker build $DOCKERFILE . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 docker push dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
