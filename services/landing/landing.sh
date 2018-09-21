@@ -31,10 +31,6 @@ git clone https://github.com/SciCatProject/landingpageserver.git component
 	cd component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
-DOCKERNAME="-f ./CI/ESS/Dockerfile.dmscprod"
-if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
-	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmscprod"
-fi
 echo $DOCKERNAME
 docker build $DOCKERNAME . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 docker push dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
