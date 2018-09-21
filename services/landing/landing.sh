@@ -30,7 +30,8 @@ git clone https://github.com/SciCatProject/landingpageserver.git component
    fi
 export FILESERVER_IMAGE_VERSION=$(git rev-parse HEAD)
 DOCKERFILE= "-f ./CI/ESS/Dockerfile.dmscprod"
-docker build -f $DOCKERFILE . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
+ls CI/ESS
+docker build $DOCKERFILE . -t dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 docker push dacat/landing:$FILESERVER_IMAGE_VERSION$LOCAL_ENV
 echo "Deploying to Kubernetes"
 cd ..
