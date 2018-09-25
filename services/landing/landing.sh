@@ -7,7 +7,7 @@ DOCKERNAME="-f ./Dockerfile"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 	envarray=(dmsc)
     INGRESS_NAME="-f ./landingserver/dmsc.yaml"
-	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmscprod"
+	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmsc"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
