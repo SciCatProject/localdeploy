@@ -11,6 +11,7 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
 	envarray=(ess)
     INGRESS_NAME="-f ./landingserver/lund.yaml"
+	DOCKERNAME="-f ./CI/ESS/Dockerfile.ess"
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
 	envarray=(dmscprod)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
