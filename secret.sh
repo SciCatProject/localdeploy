@@ -2,6 +2,7 @@
 
 
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
+    kubectl create ns dmsc
 	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=kubetest01.dm.esss.dk" -days 3650
 	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=kubetest02.dm.esss.dk" -days 3650
 	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=kubetest03.dm.esss.dk" -days 3650
