@@ -6,12 +6,16 @@ envarray=(dev)
 
 
 INGRESS_NAME=" "
+DOCKERNAME="-f ./Dockerfile"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-api-server/dmsc.yaml"
+    DOCKERNAME="-f ./CI/ESS/Dockerfile.proxy"
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
     INGRESS_NAME="-f ./dacat-api-server/lund.yaml"
+    DOCKERNAME="-f ./Dockerfile"
 elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-api-server/dmscprod.yaml"
+    DOCKERNAME="-f ./CI/ESS/Dockerfile.proxy"
 fi
 
 
@@ -35,7 +39,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
      echo "Building release"
    fi
    export CATAMEL_IMAGE_VERSION=$(git rev-parse HEAD)
-   docker build -t $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV -t $3:latest .
+   docker build ${DOCKERNAME} -t $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV -t $3:latest .
    docker push $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV
    echo "Deploying to Kubernetes"
    cd ..
