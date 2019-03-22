@@ -35,12 +35,16 @@ for ((i=0;i<${#envarray[@]};i++)); do
      git clone $REPO component
      cd component/
 	git checkout develop
+		if  [ "$(hostname)" != "k8-lrg-serv-prod.esss.dk" ]; then
      npm install
+     fi
      echo "Building release"
    fi
    export CATAMEL_IMAGE_VERSION=$(git rev-parse HEAD)
+   if  [ "$(hostname)" != "k8-lrg-serv-prod.esss.dk" ]; then
    docker build ${DOCKERNAME} -t $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV -t $3:latest .
    docker push $3:$CATAMEL_IMAGE_VERSION$LOCAL_ENV
+   fi
    echo "Deploying to Kubernetes"
    cd ..
    helm install dacat-api-server --name catamel --namespace $LOCAL_ENV --set image.tag=$CATAMEL_IMAGE_VERSION$LOCAL_ENV --set image.repository=$3 ${INGRESS_NAME}
