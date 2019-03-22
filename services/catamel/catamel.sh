@@ -13,7 +13,7 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
 elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
     INGRESS_NAME="-f ./dacat-api-server/lund.yaml"
     DOCKERNAME="-f ./Dockerfile"
-elif  [ "$(hostname)" == "k8-lrg-prod.esss.dk" ]; then
+elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-api-server/dmscprod.yaml"
     DOCKERNAME="-f ./CI/ESS/Dockerfile.proxy"
 fi
