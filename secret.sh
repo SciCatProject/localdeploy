@@ -29,9 +29,12 @@ elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
     kubectl create ns dmscprod
         openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=catanieservice.esss.dk" -days 3650
         openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=catamelservice.esss.dk" -days 3650
-        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt -subj "/CN=scicatlandingpageserver.esss.dk" -days 3650
-        kubectl create secret -ndmscprod tls catanieservice --key catanie.key --cert catanie.crt
+        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=scicatlandingpageserver.esss.dk" -days 3650
+        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt  -subj "/CN=scicatfileserver.esss.dk" -days 3650
+
+	kubectl create secret -ndmscprod tls catanieservice --key catanie.key --cert catanie.crt
         kubectl create secret -ndev tls catamelservice --key catamel.key --cert catamel.crt
-        kubectl create secret -ndmscprod tls landingserverservice --key fileserver.key --cert fileserver.crt
+        kubectl create secret -ndmscprod tls landingserverservice --key landingserver.key -out landingserver.crt
+        kubectl create secret -ndev tls fileserverservice --key fileserver.key --cert fileserver.crt
 	
 fi
