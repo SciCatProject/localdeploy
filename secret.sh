@@ -16,9 +16,9 @@ elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
     kubectl create ns ess
 	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=scicat01.esss.lu.se" -days 3650
 
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=scicat04.esss.lu.se" -days 3650
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=scicat05.esss.lu.se" -days 3650
-	#openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt -subj "/CN=scicat03.esss.lu.se" -days 3650
+	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=scicat05.esss.lu.se" -days 3650
+	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=scicat06.esss.lu.se" -days 3650
+	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt -subj "/CN=scicat07.esss.lu.se" -days 3650
 
 
 	kubectl create secret -ness tls catanieservice --key catanie.key --cert catanie.crt
