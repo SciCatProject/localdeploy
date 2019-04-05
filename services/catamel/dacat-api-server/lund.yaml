@@ -1,3 +1,3 @@
 ingress:
   enabled: true
-  host: scicat03.esss.lu.se
+  host: scicat05.esss.lu.se
