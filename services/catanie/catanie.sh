@@ -41,7 +41,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
         git checkout develop
         git pull
         ./CI/ESS/copyimages.sh
-        if  [ $BUILD == "true" ]; then
+        if  [[ $BUILD == "true" ]]; then
             npm install
             ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV --output-path dist/$LOCAL_ENV
         fi
@@ -53,13 +53,13 @@ for ((i=0;i<${#envarray[@]};i++)); do
         
         ./CI/ESS/copyimages.sh
         echo "Building release"
-        if  [ $BUILD == "true" ]; then
+        if  [[ $BUILD == "true" ]]; then
             npm install
             ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV --output-path dist/$LOCAL_ENV
         fi
     fi
     export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
-    if  [ $BUILD == "true" ]; then
+    if  [[ $BUILD == "true" ]]; then
         docker build -t $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV -t $2:latest --build-arg env=$LOCAL_ENV .
         echo docker build -t $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV --build-arg env=$LOCAL_ENV .
         docker push $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV
