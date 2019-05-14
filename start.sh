@@ -8,7 +8,7 @@ fi
 echo $LOCAL_IP
 #minikube start -v7  --insecure-registry localhost:5000 --extra-config=apiserver.GenericServerRunOptions.AuthorizationMode=RBAC
 
-minikube start --kubernetes-version=v1.11.0
+minikube start 
 #kubectl config use-context minikube #should auto set, but added in case
 
 kubectl -n kube-system create sa tiller
