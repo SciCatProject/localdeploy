@@ -38,7 +38,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
     cd ./services/scichat-loopback/
     if [ -d "./component/" ]; then
         cd component/
-        git checkout develop
+        git checkout master
         git pull
         if  [[ $BUILD == "true" ]]; then
             npm install
@@ -46,7 +46,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
     else
         git clone $REPO component
         cd component/
-        git checkout develop
+        git checkout master
         git pull
         
         echo "Building release"
