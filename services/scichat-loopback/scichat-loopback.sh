@@ -1,19 +1,19 @@
 #!/bin/bash
 
-envarray=(dmsc)
+envarray=(dev)
 
 INGRESS_NAME=" "
 BUILD="true"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
-    envarray=(dmsc)
+    envarray=(dev)
     INGRESS_NAME="-f ./dacat-gui/dmsc.yaml"
     BUILD="false"
     elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
-    envarray=(ess)
+    envarray=(dev)
     INGRESS_NAME="-f ./dacat-gui/lund.yaml"
     BUILD="false"
     elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
-    envarray=(dmscprod)
+    envarray=(dev)
     INGRESS_NAME="-f ./dacat-gui/dmscprod.yaml"
     BUILD="false"
 fi
@@ -55,16 +55,16 @@ for ((i=0;i<${#envarray[@]};i++)); do
         fi
     fi
     export SCICHAT_IMAGE_VERSION=$(git rev-parse HEAD)
+	repo="dacat/scichat-loopback"
     if  [[ $BUILD == "true" ]]; then
-		repo = "dacat/scichat-loopback:"
-        docker build -t ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV -t $2:latest --build-arg env=$LOCAL_ENV .
+        docker build -t ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV -t ${repo}:latest --build-arg env=$LOCAL_ENV .
         echo docker build -t ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV --build-arg env=$LOCAL_ENV .
         docker push ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV
         echo docker push ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV
     fi
     echo "Deploying to Kubernetes"
     cd ..
-    helm install scichat --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2 ${INGRESS_NAME}
+    helm install scichat --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=${repo} ${INGRESS_NAME}
 
-    echo helm install dacat-gui --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2
+    echo helm install dacat-gui --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=${repo}
 done
