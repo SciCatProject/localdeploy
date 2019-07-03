@@ -63,6 +63,7 @@ for ((i=0;i<${#envarray[@]};i++)); do
     fi
     echo "Deploying to Kubernetes"
     cd ..
-    helm install dacat-gui --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2 ${INGRESS_NAME}
+    helm install scichat --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2 ${INGRESS_NAME}
+
     echo helm install dacat-gui --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2
 done
