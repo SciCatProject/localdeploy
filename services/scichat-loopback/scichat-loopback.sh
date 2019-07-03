@@ -56,10 +56,11 @@ for ((i=0;i<${#envarray[@]};i++)); do
     fi
     export SCICHAT_IMAGE_VERSION=$(git rev-parse HEAD)
     if  [[ $BUILD == "true" ]]; then
-        docker build -t $2:$SCICHAT_IMAGE_VERSION$LOCAL_ENV -t $2:latest --build-arg env=$LOCAL_ENV .
-        echo docker build -t $2:$SCICHAT_IMAGE_VERSION$LOCAL_ENV --build-arg env=$LOCAL_ENV .
-        docker push $2:$SCICHAT_IMAGE_VERSION$LOCAL_ENV
-        echo docker push $2:$SCICHAT_IMAGE_VERSION$LOCAL_ENV
+		repo = "dacat/scichat-loopback:"
+        docker build -t ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV -t $2:latest --build-arg env=$LOCAL_ENV .
+        echo docker build -t ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV --build-arg env=$LOCAL_ENV .
+        docker push ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV
+        echo docker push ${repo}:$SCICHAT_IMAGE_VERSION$LOCAL_ENV
     fi
     echo "Deploying to Kubernetes"
     cd ..
