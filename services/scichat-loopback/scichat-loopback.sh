@@ -6,15 +6,15 @@ INGRESS_NAME=" "
 BUILD="true"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     envarray=(dev)
-    INGRESS_NAME="-f ./dacat-gui/dmsc.yaml"
+    INGRESS_NAME="-f ./scichat/dmsc.yaml"
     BUILD="false"
     elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
     envarray=(dev)
-    INGRESS_NAME="-f ./dacat-gui/lund.yaml"
+    INGRESS_NAME="-f ./scichat/lund.yaml"
     BUILD="false"
     elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
     envarray=(dev)
-    INGRESS_NAME="-f ./dacat-gui/dmscprod.yaml"
+    INGRESS_NAME="-f ./scichat/dmscprod.yaml"
     BUILD="false"
 fi
 
@@ -66,5 +66,5 @@ for ((i=0;i<${#envarray[@]};i++)); do
     cd ..
     helm install scichat --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=${repo} ${INGRESS_NAME}
 
-    echo helm install dacat-gui --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=${repo}
+    echo helm install scichat --name scichat-loopback --namespace $LOCAL_ENV --set image.tag=$SCICHAT_IMAGE_VERSION$LOCAL_ENV --set image.repository=${repo}
 done
