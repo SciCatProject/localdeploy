@@ -37,21 +37,6 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/src/app/server/config.local.js
-              subPath: config.local.js
-            - name: config-volume
-              mountPath: /usr/src/app/server/component-config.{{ .Release.Namespace }}.json
-              subPath: component-config.json
-            - name: config-volume
-              mountPath: /usr/src/app/server/middleware.{{ .Release.Namespace }}.json
-              subPath: middleware.json
-            - name: config-volume
-              mountPath: /usr/src/app/server/providers.local.json
-              subPath: providers.json
-            - name: config-volume
-              mountPath: /usr/src/app/server/providers.json
-              subPath: providers.json
-            - name: config-volume
               mountPath: /usr/src/app/server/datasources.{{ .Release.Namespace }}.json
               subPath: datasources.json
             - name: config-volume
