@@ -19,7 +19,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: [ "/bin/sh","-c","ls -al . ; ls -al server; cat server/config.json; echo 'Environment:' {{ .Release.Namespace }}; node ." ]
+          command: [ "/bin/sh","-c","ls -al . ; ls -al server; cat server/datasources.json ; cat server/config.json; echo 'Environment:' {{ .Release.Namespace }}; node ." ]
           env:
           - name: NODE_ENV
             value: {{ .Release.Namespace }}
