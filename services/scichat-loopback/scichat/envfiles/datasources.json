@@ -4,14 +4,15 @@
     "connector": "memory"
   },
   "mongo": {
-    "host": "localhost",
+    "host": "local-mongodb-mongodb.dev",
     "port": 27017,
     "url": "",
     "database": "scichat",
     "password": "",
     "name": "mongo",
     "user": "",
-    "connector": "mongodb"
+    "connector": "mongodb",
+    "useNewUrlParser":"true"
   },
   "storage": {
     "name": "storage",

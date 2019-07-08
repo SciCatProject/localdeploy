@@ -30,6 +30,7 @@ echo $CATANIE_REPO
 
 
 helm del --purge local-mongodb
+helm del --purge local-postgresql
 helm del --purge local-rabbit
 helm del --purge local-node
         if [[ "KAFKA" -eq "1" ]]; then
@@ -43,6 +44,8 @@ for file in $NS_DIR; do
   export LOCAL_ENV="$ns"
 kubectl apply -f mongo.yaml
   helm install stable/mongodb --version 0.4.15 --namespace $LOCAL_ENV --name local-mongodb
+kubectl apply -f postgres.yaml
+  helm install stable/postgresql  --namespace $LOCAL_ENV --name local-postgresql
         if [[ "KAFKA" -eq "1" ]]; then
 
 helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
