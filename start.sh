@@ -18,7 +18,8 @@ helm repo update
 #kubectl apply -f ./deployments/registry.yaml
 #kubectl apply -f ./deployments/ingress/nginx-controller.yaml
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+
 
 sleep 5
 
