@@ -1,3 +1,4 @@
 ingress:
   enabled: true
   host: scicat02.esss.lu.se
+  path: /landing
