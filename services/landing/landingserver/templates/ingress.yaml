@@ -3,6 +3,7 @@
 {{- $servicePort := .Values.service.externalPort -}}
 {{- $namespace := .Release.Namespace -}}
 {{- $host := .Values.ingress.host -}}
+{{- $path := .Values.ingress.path -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
