@@ -57,6 +57,9 @@ spec:
             - name: config-volume
               mountPath: /usr/src/app/server/datasources.json
               subPath: datasources.json
+            - name: config-volume
+              mountPath: /usr/src/app/server/doiconfig.local.json
+              subPath: doiconfig.local.json
       volumes:
         - name: config-volume
           configMap:
