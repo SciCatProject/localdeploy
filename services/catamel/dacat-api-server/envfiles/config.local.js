@@ -5,6 +5,8 @@ module.exports = {
     host: process.env.HOST || '0.0.0.0',
     port: process.env.PORT || 3000,
     pidPrefix: '20.500.12269',
+    doiPrefix: '10.17199',
+    publicURLprefix: "https://doi.esss.se/datasets/",
     policyPublicationShiftInYears: 3,
     policyRetentionShiftInYears: 10,
     site: 'ESS',

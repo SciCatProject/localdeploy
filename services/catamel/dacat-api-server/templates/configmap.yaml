@@ -18,3 +18,5 @@ data:
 {{ .Files.Get "envfiles/datasources.json" | indent 4 }}
   providers.json: |-
 {{ .Files.Get "envfiles/providers.json" | indent 4 }}
+  doiconfig.local.json: |-
+{{ .Files.Get "envfiles/doiconfig.local.json" | indent 4 }}
