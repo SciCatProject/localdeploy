@@ -86,7 +86,7 @@ https://docs.docker.com/registry/insecure/
 
 #### Port Forward Pod
 
-```
+```bash
 export POD_NAME=$(kubectl get pods --namespace dev -l "app=calico-lynx-rabbitmq" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $POD_NAME 5672:5672 15672:15672
 ```
