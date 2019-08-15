@@ -72,7 +72,7 @@ The scripts in this repository should do most of the work for you, that work is 
 
 ## Notes
 
-https://docs.docker.com/registry/insecure/
+<https://docs.docker.com/registry/insecure/>
 
 ## Snippets
 
