@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 kubectl delete -f mongo.yaml
 kubectl delete -f rabbit.yaml
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Setup minikube and kubectl
 if [ "$(uname)" == "Darwin" ]; then
