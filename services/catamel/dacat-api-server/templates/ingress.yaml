@@ -30,4 +30,19 @@ spec:
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+    - host: catanieservice.esss.dk
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /explorer
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /auth/msad
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
 {{- end -}}
