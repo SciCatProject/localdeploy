@@ -41,10 +41,6 @@ for ((i=0;i<${#envarray[@]};i++)); do
         git checkout develop
         git pull
         ./CI/ESS/copyimages.sh
-        if  [[ $BUILD == "true" ]]; then
-            npm install
-            ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV --output-path dist/$LOCAL_ENV
-        fi
     else
         git clone $REPO component
         cd component/
@@ -53,21 +49,9 @@ for ((i=0;i<${#envarray[@]};i++)); do
         
         ./CI/ESS/copyimages.sh
         echo "Building release"
-        if  [[ $BUILD == "true" ]]; then
-            npm install
-            ./node_modules/@angular/cli/bin/ng build --configuration $LOCAL_ENV --output-path dist/$LOCAL_ENV
-        fi
     fi
     export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
-    if  [[ $BUILD == "true" ]]; then
-        docker build -t $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV -t $2:latest --build-arg env=$LOCAL_ENV .
-        echo docker build -t $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV --build-arg env=$LOCAL_ENV .
-        docker push $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV
-        echo docker push $2:$CATANIE_IMAGE_VERSION$LOCAL_ENV
-    fi
     echo "Deploying to Kubernetes"
     cd ..
-    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=$CATANIE_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2 ${INGRESS_NAME}
-    echo helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=$CATANIE_IMAGE_VERSION$LOCAL_ENV --set image.repository=$2
-    # envsubst < ../catanie-deployment.yaml | kubectl apply -f - --validate=false
+    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=latestdev --set image.repository=$2 ${INGRESS_NAME}
 done
