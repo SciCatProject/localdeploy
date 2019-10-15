@@ -21,6 +21,13 @@ spec:
     hosts:
     - {{ $host }}
   rules:
+    - host: kubetest02.dm.esss.dk
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
     - host: {{ $host }}
       http:
         paths:
