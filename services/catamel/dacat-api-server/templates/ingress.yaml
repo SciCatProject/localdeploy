@@ -28,7 +28,7 @@ spec:
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
-    - host: catanieservice.esss.dk
+    - host: kubetest01.dm.esss.dk
       http:
         paths:
           - path: /api
