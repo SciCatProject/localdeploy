@@ -6,11 +6,17 @@ image:
   repository: localhost:5000/catanie
   tag: e76815bdad82440ff0a6a15a0bbb04b1d0e80accqa
   pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
 service:
   name: catanie
   type: NodePort
   externalPort: 80
   internalPort: 80
+
 ingress:
   enabled: true
   # Used to create an Ingress record.
