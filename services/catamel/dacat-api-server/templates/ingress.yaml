@@ -1,21 +1,19 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "fullname" . -}}
+{{- $fullName := include "catamel.fullname" . -}}
+{{- $serviceName := include "catamel.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
-{{- $namespace := .Release.Namespace -}}
 {{- $host := .Values.ingress.host -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ $fullName }}
   labels:
-    app: {{ template "name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "catamel.labels" . | indent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
     ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   tls:
@@ -23,14 +21,14 @@ spec:
     hosts:
     - {{ $host }}
   rules:
-    - host: {{ $host }}
+    - host: kubetest02.dm.esss.dk
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
-    - host: catanieservice.esss.dk
+    - host: {{ $host }}
       http:
         paths:
           - path: /api

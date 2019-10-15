@@ -1,22 +1,18 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "fullname" . -}}
+{{- $fullName := include "catanie.fullname" . -}}
+{{- $serviceName := include "catanie.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
-{{- $namespace := .Release.Namespace -}}
 {{- $host := .Values.ingress.host -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ $fullName }}
   labels:
-    app: {{ template "name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+{{ include "catanie.labels" . | indent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
-    ingress.kubernetes.io/ssl-redirect: "true"
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   tls:
   - secretName: catanieservice

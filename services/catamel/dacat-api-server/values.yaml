@@ -6,11 +6,17 @@ image:
   repository: localhost:5000/catamel
   tag: 39d8a1f5098d4f1b6e939ede378f6a10bde1bbc7
   pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
 service:
-  name: dacat-api
+  name: catamel
   type: ClusterIP
   externalPort: 80
   internalPort: 3000
+
 ingress:
   enabled: true
   # Used to create an Ingress record.
