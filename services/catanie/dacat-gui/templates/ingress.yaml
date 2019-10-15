@@ -1,7 +1,7 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "fullname" . -}}
+{{- $fullName := include "catanie.fullname" . -}}
+{{- $serviceName := include "catanie.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
-{{- $namespace := .Release.Namespace -}}
 {{- $host := .Values.ingress.host -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
