@@ -21,7 +21,7 @@ spec:
     hosts:
     - {{ $host }}
   rules:
-    - host: kubetest02.dm.esss.dk
+    - host: scicatapi.esss.dk
       http:
         paths:
           - path: /
