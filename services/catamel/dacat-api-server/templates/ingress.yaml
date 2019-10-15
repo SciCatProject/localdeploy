@@ -14,8 +14,6 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-    ingress.kubernetes.io/ssl-redirect: "true"
-spec:
   tls:
   - secretName: catamelservice
     hosts:
