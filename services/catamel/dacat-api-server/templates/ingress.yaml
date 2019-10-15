@@ -24,13 +24,6 @@ spec:
     - host: {{ $host }}
       http:
         paths:
-          - path: /
-            backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
-    - host: {{ $host }}
-      http:
-        paths:
           - path: /api
             backend:
               serviceName: {{ $serviceName }}
