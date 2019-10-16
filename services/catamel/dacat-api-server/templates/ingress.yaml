@@ -19,7 +19,7 @@ spec:
     hosts:
     - {{ $host }}
   rules:
-    - host: scicatapi.esss.dk
+    - host: catamelservice.esss.dk
       http:
         paths:
           - path: /
