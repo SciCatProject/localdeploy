@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 envarray=(dmsc)
 
@@ -14,21 +14,13 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-gui/dmscprod.yaml"
 fi
 
-export DACATHOME=/home/encima/dev/psi
 export REPO=https://github.com/SciCatProject/catanie.git
-portarray=(30021 30023)
-hostextarray=('-qa' '')
-certarray=('discovery' 'discovery')
 
 echo $1
 
 for ((i=0;i<${#envarray[@]};i++)); do
     export LOCAL_ENV="${envarray[i]}"
-    export PORTOFFSET="${portarray[i]}"
-    export HOST_EXT="${hostextarray[i]}"
-    export CERTNAME="${certarray[i]}"
     export LOCAL_IP="$1"
-    echo $LOCAL_ENV $PORTOFFSET $HOST_EXT
     echo $LOCAL_ENV
     helm del --purge catanie
     cd ./services/catanie/
