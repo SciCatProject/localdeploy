@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
 envarray=(dmsc)
+export REPO=https://github.com/SciCatProject/catanie.git
 
 INGRESS_NAME=" "
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
@@ -14,7 +14,6 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     INGRESS_NAME="-f ./dacat-gui/dmscprod.yaml"
 fi
 
-export REPO=https://github.com/SciCatProject/catanie.git
 
 echo $1
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-export DACATHOME=/home/encima/dev/psi
 export REPO=https://github.com/SciCatProject/catamel.git
 envarray=(dev)
 
