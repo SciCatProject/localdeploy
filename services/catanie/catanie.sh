@@ -44,9 +44,9 @@ for ((i=0;i<${#envarray[@]};i++)); do
     }
     
     if docker_tag_exists dacat/catanie latest; then
-        echo exist
+        echo exists
+        helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=latest --set image.repository=$2 ${INGRESS_NAME}
     else
         echo not exists
     fi
-    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=latest --set image.repository=$2 ${INGRESS_NAME}
 done
