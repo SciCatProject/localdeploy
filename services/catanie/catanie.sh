@@ -38,5 +38,5 @@ for ((i=0;i<${#envarray[@]};i++)); do
     export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
     echo "Deploying to Kubernetes"
     cd ..
-    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=latestdev --set image.repository=$2 ${INGRESS_NAME}
+    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=${CATANIE_IMAGE_VERSION}dmscdev --set image.repository=$2 ${INGRESS_NAME}
 done
