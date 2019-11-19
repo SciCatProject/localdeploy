@@ -38,5 +38,15 @@ for ((i=0;i<${#envarray[@]};i++)); do
     export CATANIE_IMAGE_VERSION=$(git rev-parse HEAD)
     echo "Deploying to Kubernetes"
     cd ..
-    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=${CATANIE_IMAGE_VERSION}dmscdev --set image.repository=$2 ${INGRESS_NAME}
+    
+    function docker_tag_exists() {
+        curl --silent -f -lSL https://index.docker.io/v1/repositories/$1/tags/$2 > /dev/null
+    }
+    
+    if docker_tag_exists dacat/catanie latest; then
+        echo exist
+    else
+        echo not exists
+    fi
+    helm install dacat-gui --name catanie --namespace $LOCAL_ENV --set image.tag=latest --set image.repository=$2 ${INGRESS_NAME}
 done
