@@ -8,20 +8,20 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-{{ include "catanie.labels" . | indent 4 }}
-  {{- with .Values.ingress.annotations }}
+    {{ include "catanie.labels" . | indent 4 }}
+    {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   tls:
     - hosts:
-    {{ if eq .Release.Namespace "production" }}
-    - scitest.esss.lu.se
-    {{ else }}
-    - scicat02.esss.dk
-    {{ end }}
-  - secretName: catanieservice
+      {{ if eq .Release.Namespace "production" }}
+      - scitest.esss.lu.se
+      {{ else }}
+      - scicat02.esss.dk
+      {{ end }}
+    - secretName: catanieservice
   rules:
     {{ if eq .Release.Namespace "production" }}
     - host: scitest.esss.lu.se
