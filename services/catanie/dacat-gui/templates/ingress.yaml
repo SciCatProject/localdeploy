@@ -19,7 +19,10 @@ spec:
   {{- if eq .Release.Namespace "production"}}
     hosts:
     - {{ $host }}
-    {{- end }}
+  {{- else }}
+    hosts:
+    - scicat02.esss.lu.se
+  {{- end }}
   rules:
   {{- if eq .Release.Namespace "production"}}
     - host: {{ $host }}
@@ -29,6 +32,14 @@ spec:
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
-    {{- end }}
+  {{- else }}
+    - host: scicat02.esss.lu.se
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+  {{- end }}
 {{- end -}}
 
