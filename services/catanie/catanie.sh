@@ -51,8 +51,8 @@ function docker_tag_exists() {
 
 if docker_tag_exists dacat/catanie latest; then
     echo exists
-    helm upgrade catanie-${env} dacat-gui --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env
-    helm history catanie-${env}
+    helm upgrade catanie dacat-gui --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env
+    helm history catanie
 else
     echo not exists
 fi
