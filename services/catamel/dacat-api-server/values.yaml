@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: localhost:5000/catamel
+  repository: dacat/catamel
   tag: 39d8a1f5098d4f1b6e939ede378f6a10bde1bbc7
   pullPolicy: Always
 

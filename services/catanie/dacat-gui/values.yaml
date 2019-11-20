@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: localhost:5000/catanie
+  repository: dacat/catanie
   tag: e76815bdad82440ff0a6a15a0bbb04b1d0e80accqa
   pullPolicy: Always
 
