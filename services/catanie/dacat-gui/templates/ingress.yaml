@@ -18,14 +18,14 @@ spec:
   - secretName: catanieservice
   {{- if eq .Release.Namespace "production"}}
     hosts:
-    - {{ $host }}
+    -  scitest.esss.lu.se
   {{- else }}
     hosts:
     - scicat02.esss.lu.se
   {{- end }}
   rules:
   {{- if eq .Release.Namespace "production"}}
-    - host: {{ $host }}
+    - host: scitest.esss.lu.se
       http:
         paths:
           - path: /
