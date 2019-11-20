@@ -7,15 +7,6 @@ export env=$1
 
 export REPO=https://github.com/SciCatProject/catamel.git
 
-INGRESS_NAME=" "
-if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
-    INGRESS_NAME="-f ./dacat-api-server/dmsc.yaml"
-    elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
-    INGRESS_NAME="-f ./dacat-api-server/lund.yaml"
-    elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
-    INGRESS_NAME="-f ./dacat-api-server/dmscprod.yaml"
-fi
-
 
 echo $1
 
