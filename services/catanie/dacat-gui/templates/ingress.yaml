@@ -16,22 +16,18 @@ metadata:
 spec:
   tls:
   - secretName: catanieservice
+    {{- if eq .Release.Namespace "production"}}
     hosts:
-      {{ if eq .Release.Namespace "production" }}
-      - scitest.esss.lu.se
-      {{ else }}
-      - scicat02.esss.dk
-      {{ end }}
+    - {{ $host }}
+    {{- end }}
   rules:
-    {{ if eq .Release.Namespace "production" }}
-    - host: scitest.esss.lu.se
-    {{ else }}
-    - host: scicat02.esss.dk
-    {{ end }}
+    {{- if eq .Release.Namespace "production"}}
+    - host: {{ $host }}
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+    {{- end }}
 {{- end -}}
