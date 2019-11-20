@@ -23,10 +23,11 @@ export tag=$(git rev-parse HEAD)
 cd ..
 
 
+helm install --name=catanie-${env} dacat-gui  --namespace=${env} --set image.tag=$tag$env --wait  ${INGRESS_NAME}
 envarray=( production qa)
 for ((i=0;i<${#envarray[@]};i++)); do
-    export LOCAL_ENV="${envarray[i]}"
-    helm install --name=catanie-${env} dacat-gui  --namespace=${env} --set image.tag=$tag$env --wait ${INGRESS_NAME}
+    export env="${envarray[i]}"
+    helm install --name=catanie-${env} dacat-gui  --namespace=${env} --set image.tag=$tag$env --wait 
 done
 
 cd ../..
