@@ -3,6 +3,7 @@ env="dev"
 cd services/catanie
 
 cd component
+git pull
 export tag=$(git rev-parse HEAD)
 cd ..
 
