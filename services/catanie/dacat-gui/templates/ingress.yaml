@@ -8,20 +8,20 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{ include "catanie.labels" . | indent 4 }}
-    {{- with .Values.ingress.annotations }}
+{{ include "catanie.labels" . | indent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   tls:
   - secretName: catanieservice
-    {{- if eq .Release.Namespace "production"}}
+  {{- if eq .Release.Namespace "production"}}
     hosts:
     - {{ $host }}
     {{- end }}
   rules:
-    {{- if eq .Release.Namespace "production"}}
+  {{- if eq .Release.Namespace "production"}}
     - host: {{ $host }}
       http:
         paths:
@@ -31,3 +31,4 @@ spec:
               servicePort: {{ $servicePort }}
     {{- end }}
 {{- end -}}
+
