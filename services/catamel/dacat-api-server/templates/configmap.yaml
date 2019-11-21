@@ -15,7 +15,14 @@ data:
 {{ .Files.Get "envfiles/providers.json" | indent 4 }}
   doiconfig.local.json: |-
 {{ .Files.Get "envfiles/doiconfig.local.json" | indent 4 }}
-  {{- if eq .Release.Namespace "qa"}}
-    datasources.json: |-
-  {{ .Files.Get "envfiles/datasources.qa.json" | indent 4 }}
-  {{- end }}
+{{- if eq .Release.Namespace "qa"}}
+  datasources.json: |-
+{{ .Files.Get "envfiles/datasources.qa.json" | indent 4 }}
+{{- else if  eq .Release.Namespace "dev"}}
+  datasources.json: |-
+{{ .Files.Get "envfiles/datasources.dev.json" | indent 4 }}
+{{- else if  eq .Release.Namespace "production"}}
+  datasources.json: |-
+{{ .Files.Get "envfiles/datasources.production.json" | indent 4 }}
+{{- end }}
+  
