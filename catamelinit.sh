@@ -3,7 +3,7 @@ env="dev"
 
 
 
-cd services/catanie
+cd services/catamel
 
 cd component
 git pull
