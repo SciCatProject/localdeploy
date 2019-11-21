@@ -4,7 +4,7 @@
       "connector": "memory"
     },
     "mongo": {
-      "host": "mongodb.qa",
+      "host": "mongodb-qa.qa",
       "port": 27017,
       "url": "",
       "database": "dacat",
