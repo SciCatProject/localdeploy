@@ -35,7 +35,7 @@ function docker_tag_exists() {
 if docker_tag_exists dacat/catamel $tag$env; then
     echo exists
     #helm install dacat-api-server --name catamel --namespace $LOCAL_ENV --set image.tag=$CATAMEL_IMAGE_VERSION$LOCAL_ENV --set image.repository=$3 ${INGRESS_NAME}
-    helm upgrade dacat-api-server-${env} dacat-api-server --namespace=${env} --set image.tag=$tag
+    helm upgrade dacat-api-server-${env} dacat-api-server --namespace=${env} --set image.tag=$tag$env
     helm history catamel-${env}
     echo "To roll back do: helm rollback --wait --recreate-pods dacat-api-server-${env} revision-number"
 else
