@@ -18,7 +18,7 @@ spec:
   - secretName: catanieservice
   {{- if eq .Release.Namespace "production"}}
     hosts:
-    -  scitest.esss.lu.se
+    - : scitest.esss.lu.se
   {{- else }}
     hosts:
     - scicat02.esss.lu.se
