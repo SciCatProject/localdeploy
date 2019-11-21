@@ -18,3 +18,4 @@ data:
   {{- if eq .Release.Namespace "qa"}}
     datasources.json: |-
   {{ .Files.Get "envfiles/datasources.qa.json" | indent 4 }}
+  {{- end }}
