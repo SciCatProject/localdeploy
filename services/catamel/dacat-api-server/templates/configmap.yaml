@@ -15,6 +15,6 @@ data:
 {{ .Files.Get "envfiles/providers.json" | indent 4 }}
   doiconfig.local.json: |-
 {{ .Files.Get "envfiles/doiconfig.local.json" | indent 4 }}
-  {{- if eq .Release.Namespace "qa"}}
+ {{- if eq .Release.Namespace "qa"}}
     datasources.json: |-
   {{ .Files.Get "envfiles/datasources.qa.json" | indent 4 }}
