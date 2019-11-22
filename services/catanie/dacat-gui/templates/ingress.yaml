@@ -33,7 +33,7 @@ spec:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
   {{- else }}
-    - host: scicat02.esss.lu.se
+    - host: scicat08.esss.lu.se
       http:
         paths:
           - path: /
