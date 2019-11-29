@@ -8,4 +8,4 @@ metadata:
   labels:
     app: ingress-nginx
 data:
-  proxy-body-size: 17m
+  proxy-body-size: 101m
