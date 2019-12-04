@@ -21,11 +21,19 @@ spec:
     - scitest.esss.lu.se
   {{- else }}
     hosts:
-    - scicat02.esss.lu.se
+    - scicat08.esss.lu.se
   {{- end }}
   rules:
   {{- if eq .Release.Namespace "production"}}
     - host: scitest.esss.lu.se
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+  {{- else if eq .Release.Namespace "qa"}}
+    - host: scicat07.esss.lu.se
       http:
         paths:
           - path: /

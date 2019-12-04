@@ -16,17 +16,19 @@ metadata:
 spec:
   tls:
   - secretName: catamelservice
+  {{- if eq .Release.Namespace "production"}}
     hosts:
-    - {{ $host }}
+    - scitest.esss.lu.se
+  {{- else if eq .Release.Namespace "qa"}}
+    hosts:
+    - scicat07.esss.lu.se
+  {{- else }}
+    hosts:
+    - scicat08.esss.lu.se
+  {{- end }}
   rules:
-    - host: catamelservice.esss.dk
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
-    - host: {{ $host }}
+  {{- if eq .Release.Namespace "production"}}
+    - host: scitest.esss.lu.se
       http:
         paths:
           - path: /api
@@ -41,4 +43,37 @@ spec:
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+  {{- else if eq .Release.Namespace "qa"}}
+    - host: scicat07.esss.lu.se
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /explorer
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /auth/msad
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+  {{- else }}
+    - host: scicat08.esss.lu.se
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /explorer
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+          - path: /auth/msad
+            backend:
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+  {{- end }}
 {{- end -}}
