@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 env="dev"
 
-
 INGRESS_NAME=" "
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     envarray=(dmsc)
@@ -13,7 +12,6 @@ if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
     envarray=(dmscprod)
     INGRESS_NAME="-f ./dacat-gui/dmscprod.yaml"
 fi
-
 
 cd services/catanie
 
@@ -27,6 +25,7 @@ cd ..
 envarray=( production qa)
 for ((i=0;i<${#envarray[@]};i++)); do
     export env="${envarray[i]}"
+    helm del --purge catanie-${env}
     helm install --name=catanie-${env} dacat-gui  --namespace=${env} --set image.tag=$tag$env --wait 
 done
 
