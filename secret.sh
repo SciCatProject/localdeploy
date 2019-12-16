@@ -1,40 +1,25 @@
 #!/usr/bin/env bash
 
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout cataniedev.key -out cataniedev.crt -subj "/CN=scicat07.esss.lu.se" -days 3650
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanieqa.key -out catanieqa.crt -subj "/CN=scicat08.esss.lu.se" -days 3650
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=scitest.esss.lu.se" -days 3650
 
-if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
-    kubectl create ns dmsc
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=kubetest01.dm.esss.dk" -days 3650
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=kubetest02.dm.esss.dk" -days 3650
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=kubetest03.dm.esss.dk" -days 3650
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt -subj "/CN=kubetest04.dm.esss.dk" -days 3650
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catameldev.key -out catameldev.crt -subj "/CN=scicat07.esss.lu.se" -days 3650
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamelqa.key -out catamelqa.crt -subj "/CN=scicat08.esss.lu.se" -days 3650
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=scitest.esss.lu.se" -days 3650
 
-	kubectl create secret -ndmsc tls catanieservice --key catanie.key --cert catanie.crt
-	kubectl create secret -ndev tls catamelservice --key catamel.key --cert catamel.crt
-	kubectl create secret -ndmsc tls landingserverservice --key landingserver.key --cert landingserver.crt
-	kubectl create secret -ndev tls fileserverservice --key fileserver.key --cert fileserver.crt
-elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
-    kubectl create ns ess
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=scicat01.esss.lu.se" -days 3650
+kubectl delete secret -ndev catanieservice
+kubectl delete secret -nqa catanieservice
+kubectl delete secret -nproduction catanieservice
 
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=scicat05.esss.lu.se" -days 3650
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=scicat06.esss.lu.se" -days 3650
-	openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt -subj "/CN=scicat07.esss.lu.se" -days 3650
+kubectl create secret -ndev  tls catanieservice --key cataniedev.key --cert cataniedev.crt
+kubectl create secret -nqa tls catanieservice --key catanieqa.key --cert catanieqa.crt
+kubectl create secret -nproduction tls catanieservice --key catanie.key --cert catanie.crt
 
+kubectl delete secret -ndev catamelservice
+kubectl delete secret -nqa catamelservice
+kubectl delete secret -nproduction catamelservice
 
-	kubectl create secret -ness tls catanieservice --key catanie.key --cert catanie.crt
-	kubectl create secret -ness tls landingserverservice --key landingserver.key --cert landingserver.crt
-	kubectl create secret -ndev tls catamelservice --key catamel.key --cert catamel.crt
-	kubectl create secret -ndev tls fileserverservice --key fileserver.key --cert fileserver.crt
-elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
-    kubectl create ns dmscprod
-        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catanie.key -out catanie.crt -subj "/CN=catanieservice.esss.dk" -days 3650
-        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout catamel.key -out catamel.crt -subj "/CN=catamelservice.esss.dk" -days 3650
-        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout landingserver.key -out landingserver.crt -subj "/CN=scicatlandingpageserver.esss.dk" -days 3650
-        openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout fileserver.key -out fileserver.crt  -subj "/CN=scicatfileserver.esss.dk" -days 3650
-
-	kubectl create secret -ndmscprod tls catanieservice --key catanie.key --cert catanie.crt
-        kubectl create secret -ndev tls catamelservice --key catamel.key --cert catamel.crt
-        kubectl create secret -ndmscprod tls landingserverservice --key landingserver.key -out landingserver.crt
-        kubectl create secret -ndev tls fileserverservice --key fileserver.key --cert fileserver.crt
-	
-fi
+kubectl create secret -ndev tls catamelservice --key catameldev.key --cert catameldev.crt
+kubectl create secret -nqa tls catamelservice --key catamelqa.key --cert catamelqa.crt
+kubectl create secret -nproduction tls catamelservice --key catamel.key --cert catamel.crt
