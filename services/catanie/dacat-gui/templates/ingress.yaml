@@ -19,9 +19,12 @@ spec:
   {{- if eq .Release.Namespace "production"}}
     hosts:
     - scitest.esss.lu.se
-  {{- else }}
+  {{- else if eq .Release.Namespace "qa"}}
     hosts:
     - scicat08.esss.lu.se
+  {{- else }}
+    hosts:
+    - scicat07.esss.lu.se
   {{- end }}
   rules:
   {{- if eq .Release.Namespace "production"}}
@@ -33,7 +36,7 @@ spec:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
   {{- else if eq .Release.Namespace "qa"}}
-    - host: scicat07.esss.lu.se
+    - host: scicat08.esss.lu.se
       http:
         paths:
           - path: /
@@ -41,7 +44,7 @@ spec:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
   {{- else }}
-    - host: scicat08.esss.lu.se
+    - host: scicat07.esss.lu.se
       http:
         paths:
           - path: /
