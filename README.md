@@ -2,7 +2,9 @@
 
 ## Purpose
 
-The purpose of this repo is to create a minimal install of the Data Catalog project into a minikube cluster on your machine, with a configurable number of namespaces
+The original purpose of this repo is to create a minimal install of the Data Catalog project into a minikube cluster on your machine, with a configurable number of namespaces.
+
+The repo is now responsible for operational deployment of the SciCat components (catanie, catamel etc.) to development and production environments. This repo should be coupled with a private secrets repository.
 
 ### Software required
 
