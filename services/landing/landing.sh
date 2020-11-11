@@ -38,9 +38,9 @@ function docker_tag_exists() {
 if docker_tag_exists dacat/landing $tag$env; then
     echo exists
     if [ "${env}" == "dev" ]; then
-        helm upgrade landingserver-${env} landing --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env
+        helm upgrade landingserver-${env} landingserver --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env
     elif [ "${env}" == "production" ]; then
-        helm upgrade landingserver-${env} landing --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env ${INGRESS_NAME}
+        helm upgrade landingserver-${env} landingserver --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env ${INGRESS_NAME}
     fi
     helm history landingserver-${env}
 else
