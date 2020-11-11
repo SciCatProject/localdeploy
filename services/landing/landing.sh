@@ -40,8 +40,7 @@ if docker_tag_exists dacat/landing $tag$env; then
     if [ "${env}" == "dev" ]; then
         helm upgrade landingserver-${env} landing --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env
     elif [ "${env}" == "production" ]; then
-        helm upgrade landingserver-${env} landing --wait --recreate-pods --nam
-espace=${env} --set image.tag=$tag$env ${INGRESS_NAME}
+        helm upgrade landingserver-${env} landing --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env ${INGRESS_NAME}
     fi
     helm history landingserver-${env}
 else
