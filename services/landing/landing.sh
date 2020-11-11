@@ -1,48 +1,50 @@
 #!/usr/bin/env bash
-envarray=(dev)
 
+if [ "$#" -ne 1 ]; then
+    echo "Usage ./landing.sh ENVIRONMENT" >&2
+    exit 1
+fi
+
+export env=$1
+export REPO=https://github.com/SciCatProject/landingpageserver.git
 
 INGRESS_NAME=" "
-DOCKERNAME="-f ./Dockerfile"
 if [ "$(hostname)" == "kubetest01.dm.esss.dk" ]; then
-	envarray=(dmsc)
     INGRESS_NAME="-f ./landingserver/dmsc.yaml"
-	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmsc"
-elif  [ "$(hostname)" == "scicat01.esss.lu.se" ]; then
-	envarray=(ess)
+elif  [ "$(hostname)" == "scicat09.esss.lu.se" ]; then
     INGRESS_NAME="-f ./landingserver/lund.yaml"
-	DOCKERNAME="-f ./CI/ESS/Dockerfile.ess"
 elif  [ "$(hostname)" == "k8-lrg-serv-prod.esss.dk" ]; then
-	envarray=(dmscprod)
     INGRESS_NAME="-f ./landingserver/dmscprod.yaml"
-	DOCKERNAME="-f ./CI/ESS/Dockerfile.dmscprod"
 fi
 
-echo $1
-
-   export LOCAL_ENV="${envarray[i]}"
-   echo $LOCAL_ENV
-helm del --purge landingserver
-cd services/landing/
-   if [ -d "./component/" ]; then
-	cd component
-     git pull 
-   else
-git clone https://github.com/SciCatProject/landingpageserver.git component
-	cd component
-   fi
-export LANDING_IMAGE_VERSION=$(git rev-parse HEAD)
-echo $DOCKERNAME
-if  [ "$(hostname)" != "k8-lrg-serv-prod.esss.dk" ]; then
-docker build $DOCKERNAME . -t dacat/landing:$LANDING_IMAGE_VERSION$LOCAL_ENV
-docker push dacat/landing:$LANDING_IMAGE_VERSION$LOCAL_ENV
+cd ./services/landing/
+if [ -d "./component/" ]; then
+    cd component
+    git checkout develop
+    git pull
+else
+    git clone $REPO  component
+    cd component
+    git checkout develop
 fi
+export tag=$(git rev-parse HEAD)
 echo "Deploying to Kubernetes"
 cd ..
-pwd
-echo helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$LANDING_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landingpageserver ${INGRESS_NAME}
-helm install landingserver --name landingserver --namespace $LOCAL_ENV --set image.tag=$LANDING_IMAGE_VERSION$LOCAL_ENV --set image.repository=dacat/landing ${INGRESS_NAME}
-# envsubst < ../catanie-deployment.yaml | kubectl apply -f - --validate=false
 
+function docker_tag_exists() {
+    curl --silent -f -lSL https://index.docker.io/v1/repositories/$1/tags/$2 > /dev/null
+}
 
+if docker_tag_exists dacat/landing $tag$env; then
+    echo exists
+    if [ "${env}" == "dev" ]; then
+        helm upgrade landingserver-${env} landing --wait --recreate-pods --namespace=${env} --set image.tag=$tag$env
+    elif [ "${env}" == "production" ]; then
+        helm upgrade landingserver-${env} landing --wait --recreate-pods --nam
+espace=${env} --set image.tag=$tag$env ${INGRESS_NAME}
+    fi
+    helm history landingserver-${env}
+else
+    echo not exists
+fi
 

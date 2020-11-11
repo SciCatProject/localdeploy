@@ -1,0 +1,3 @@
+config.local.*.js
+providers.json
+doiconfig.local.json
