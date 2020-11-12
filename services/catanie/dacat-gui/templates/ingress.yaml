@@ -18,25 +18,25 @@ spec:
   - secretName: catanieservice
   {{- if eq .Release.Namespace "production"}}
     hosts:
-    - scitest.esss.lu.se
-  {{- else if eq .Release.Namespace "qa"}}
-    hosts:
     - scicat08.esss.lu.se
+  {{- else if eq .Release.Namespace "dev"}}
+    hosts:
+    - scitest.esss.lu.se
   {{- else }}
     hosts:
     - scicat07.esss.lu.se
   {{- end }}
   rules:
   {{- if eq .Release.Namespace "production"}}
-    - host: scitest.esss.lu.se
+    - host: scicat08.esss.lu.se
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
-  {{- else if eq .Release.Namespace "qa"}}
-    - host: scicat08.esss.lu.se
+  {{- else if eq .Release.Namespace "dev"}}
+    - host: scitest.esss.lu.se
       http:
         paths:
           - path: /
