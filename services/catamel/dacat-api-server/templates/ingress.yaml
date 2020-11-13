@@ -44,7 +44,7 @@ spec:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
   {{- else if eq .Release.Namespace "dev"}}
-    - host: scicat08.esss.lu.se
+    - host: scitest.esss.lu.se
       http:
         paths:
           - path: /api
