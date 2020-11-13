@@ -5,27 +5,27 @@ metadata:
   labels:
 {{ include "catamel.labels" . | indent 4 }}
 data:
-  config.local.js: |-
-{{ .Files.Get "envfiles/config.local.js" | indent 4 }}
   component-config.json: |-
 {{ .Files.Get "envfiles/component-config.json" | indent 4 }}
   middleware.json: |-
 {{ .Files.Get "envfiles/middleware.json" | indent 4 }}
   doiconfig.local.json: |-
 {{ .Files.Get "envfiles/doiconfig.local.json" | indent 4 }}
-{{- if eq .Release.Namespace "qa"}}
   providers.json: |-
 {{ .Files.Get "envfiles/providers.json" | indent 4 }}
+{{- if eq .Release.Namespace "qa"}}
+  config.local.js: |-
+{{ .Files.Get "envfiles/config.local.qa.js" | indent 4 }}
   datasources.json: |-
 {{ .Files.Get "envfiles/datasources.qa.json" | indent 4 }}
 {{- else if  eq .Release.Namespace "dev"}}
-  providers.json: |-
-{{ .Files.Get "envfiles/providers.json" | indent 4 }}
+  config.local.js: |-
+{{ .Files.Get "envfiles/config.local.dev.js" | indent 4 }}
   datasources.json: |-
 {{ .Files.Get "envfiles/datasources.dev.json" | indent 4 }}
 {{- else if  eq .Release.Namespace "production"}}
-  providers.json: |-
-{{ .Files.Get "envfiles/providers.json" | indent 4 }}
+  config.local.js: |-
+{{ .Files.Get "envfiles/config.local.production.js" | indent 4 }}
   datasources.json: |-
 {{ .Files.Get "envfiles/datasources.production.json" | indent 4 }}
 {{- end }}
