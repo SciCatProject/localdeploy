@@ -46,23 +46,17 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: config-volume
-              mountPath: /hone/node/app/server/config.local.js
+              mountPath: /home/node/app/server/config.local.js
               subPath: config.local.js
             - name: config-volume
-              mountPath: /home/node/app/server/component-config.{{ .Release.Namespace }}.json
+              mountPath: /home/node/app/server/component-config.json
               subPath: component-config.json
             - name: config-volume
-              mountPath: /home/node/app/server/middleware.{{ .Release.Namespace }}.json
+              mountPath: /home/node/app/server/middleware.json
               subPath: middleware.json
-            - name: config-volume
-              mountPath: /home/node/app/server/providers.local.json
-              subPath: providers.json
             - name: config-volume
               mountPath: /home/node/app/server/providers.json
               subPath: providers.json
-            - name: config-volume
-              mountPath: /home/node/app/server/datasources.{{ .Release.Namespace }}.json
-              subPath: datasources.json
             - name: config-volume
               mountPath: /home/node/app/server/datasources.json
               subPath: datasources.json
