@@ -49,14 +49,20 @@ spec:
               mountPath: /home/node/app/server/config.local.js
               subPath: config.local.js
             - name: config-volume
-              mountPath: /home/node/app/server/component-config.json
+              mountPath: /home/node/app/server/component-config.{{ .Release.Namespace }}.json
               subPath: component-config.json
             - name: config-volume
-              mountPath: /home/node/app/server/middleware.json
+              mountPath: /home/node/app/server/middleware.{{ .Release.Namespace }}.json
               subPath: middleware.json
+            - name: config-volume
+              mountPath: /home/node/app/server/providers.local.json
+              subPath: providers.json
             - name: config-volume
               mountPath: /home/node/app/server/providers.json
               subPath: providers.json
+            - name: config-volume
+              mountPath: /home/node/app/server/datasources.{{ .Release.Namespace }}.json
+              subPath: datasources.json
             - name: config-volume
               mountPath: /home/node/app/server/datasources.json
               subPath: datasources.json
