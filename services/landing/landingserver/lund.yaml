@@ -1,3 +1,3 @@
 ingress:
   enabled: true
-  host: scicat07.esss.lu.se
+  host: doi.ess.eu
