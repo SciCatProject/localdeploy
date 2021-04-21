@@ -19,13 +19,6 @@ spec:
     hosts:
     - {{ $host }}
   rules:
-    - host: catamelservice.esss.dk
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
     - host: {{ $host }}
       http:
         paths:
